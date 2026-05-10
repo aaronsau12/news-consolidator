@@ -1,16 +1,36 @@
-# React + Vite
+# News Consolidator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React web app that pulls top headlines from NewsAPI and organizes them by category.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Category tabs: General, Technology, Business, Politics, Health, Sports
+- Headline cards with summary, source label, and full article link
+- Country/source labels
+- Auto-refresh every 30 minutes
+- Error + retry state
 
-## React Compiler
+## Local setup
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Install dependencies:
+   - `npm install`
+2. Create a local env file:
+   - `.env.local`
+   - `NEWS_API_KEY=your_newsapi_key_here`
+3. Start the app:
+   - `npm run dev`
 
-## Expanding the ESLint configuration
+Notes:
+- The frontend calls `/api/news`.
+- In local dev, Vite proxy forwards requests to NewsAPI and appends your key.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Deploy live (Vercel)
+
+This project includes a serverless function at `api/news.js` for production.
+
+1. Import this GitHub repo into Vercel.
+2. Add environment variable in Vercel project settings:
+   - `NEWS_API_KEY=your_newsapi_key_here`
+3. Deploy.
+
+The live app will use the same `/api/news` endpoint, now served by Vercel Functions.
